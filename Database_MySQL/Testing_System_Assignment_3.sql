@@ -264,23 +264,258 @@ VALUES  	 	 	 	 	( 	1 	, 	 	5 	 	),
 							( 	10 	, 	 	8 	 	); 
                             
 -- =================Testing_System_Assignment_3===================
--- Question 1: Viết lệnh để lấy ra danh sách nhân viên và thông tin phòng ban của họ 
+-- File: Testing_System_Assignment_3.sql
+-- Exercise 1: Join
+-- Question 1: Lấy danh sách nhân viên và thông tin phòng ban
 SELECT 
-    a.AccountID,
-    a.Email,
-    a.Username,
-    a.FullName,
-    d.DepartmentName,
-    a.CreateDate
-FROM `Account` a
-INNER JOIN Department d ON a.DepartmentID = d.DepartmentID;
+    A.Email, 
+    A.Username, 
+    A.FullName, 
+    D.DepartmentName 
+FROM `Account` A  
+INNER JOIN Department D ON A.DepartmentID = D.DepartmentID;
 
--- Question 2: Viết lệnh để lấy ra thông tin các account được tạo sau ngày 20/12/2010  
-SELECT 
-    AccountID,
-    Email,
-    Username,
-    FullName,
-    CreateDate
-FROM `Account`
+-- Question 2: Lấy account tạo sau ngày 20/12/2010
+SELECT *FROM `Account`
 WHERE CreateDate > '2010-12-20';
+
+-- Question 3: Lấy tất cả các developer
+SELECT 
+    A.FullName, 
+    A.Email, 
+    P.PositionName
+FROM `Account` A  
+INNER JOIN Position P ON A.PositionID = P.PositionID
+WHERE P.PositionName = 'Dev';
+
+-- Question 4: Phòng ban có >2 nhân viên
+SELECT 
+    D.DepartmentID,
+    D.DepartmentName, 
+    COUNT(A.DepartmentID) AS NumberOfEmployees
+FROM `Account` A
+INNER JOIN Department D ON A.DepartmentID = D.DepartmentID
+GROUP BY A.DepartmentID
+HAVING COUNT(A.DepartmentID) > 2;
+
+-- Question 5: Câu hỏi được sử dụng trong đề thi nhiều nhất
+SELECT 
+    Q.QuestionID, 
+    Q.Content,
+    COUNT(EQ.ExamID) AS NumberOfExams
+FROM 
+    ExamQuestion EQ
+INNER JOIN 
+    Question Q ON Q.QuestionID = EQ.QuestionID
+GROUP BY 
+    EQ.QuestionID
+HAVING 
+    COUNT(EQ.QuestionID) = (SELECT MAX(CountQues) 
+        FROM (
+            SELECT COUNT(QuestionID) AS CountQues 
+            FROM ExamQuestion 
+            GROUP BY QuestionID
+        ) AS countTable
+    );
+
+-- Question 6: Thống kê mỗi Category Question được sử dụng trong bao nhiêu Question
+SELECT 
+    CQ.CategoryID, 
+    CQ.CategoryName, 
+    COUNT(Q.CategoryID) AS NumberOfQuestions
+FROM CategoryQuestion CQ  
+LEFT JOIN Question Q ON CQ.CategoryID = Q.CategoryID
+GROUP BY CQ.CategoryID;
+
+-- Question 7: Thống kê mỗi Question được sử dụng trong bao nhiêu Exam
+SELECT 
+    Q.QuestionID, 
+    Q.Content,
+    COUNT(EQ.QuestionID) AS NumberOfExams
+FROM Question Q
+LEFT JOIN ExamQuestion EQ ON Q.QuestionID = EQ.QuestionID
+GROUP BY Q.QuestionID
+ORDER BY NumberOfExams DESC;
+
+-- Question 8: Question có nhiều câu trả lời nhất
+SELECT 
+    Q.QuestionID, 
+    Q.Content, 
+    COUNT(A.QuestionID) AS NumberOfAnswers
+FROM Answer A
+INNER JOIN Question Q ON Q.QuestionID = A.QuestionID
+GROUP BY A.QuestionID
+HAVING COUNT(A.QuestionID) = (
+	SELECT MAX(countQues) 
+        FROM (
+            SELECT COUNT(QuestionID) AS countQues 
+            FROM Answer 
+            GROUP BY QuestionID
+        ) AS countAnsw
+    );
+
+-- Question 9: Thống kê số lượng account trong mỗi group
+SELECT 
+    G.GroupID,
+    G.GroupName,
+    COUNT(GA.AccountID) AS NumberOfAccounts
+FROM `Group` G
+LEFT JOIN 
+    GroupAccount GA ON G.GroupID = GA.GroupID
+GROUP BY 
+    G.GroupID
+ORDER BY 
+    G.GroupID ASC;
+
+-- Question 10: Tìm chức vụ có ít người nhất
+SELECT 
+    P.PositionID, 
+    P.PositionName, 
+    COUNT(A.PositionID) AS NumberOfEmployees
+FROM Position P
+LEFT JOIN `Account` A ON P.PositionID = A.PositionID
+GROUP BY P.PositionID
+HAVING 
+    COUNT(A.PositionID) = (
+        SELECT MIN(CountP) 
+        FROM (
+            SELECT COUNT(PositionID) AS CountP 
+            FROM `Account` 
+            GROUP BY PositionID
+        ) AS MinCountP
+    );
+
+-- Question 11: Thống kê mỗi phòng ban có bao nhiêu dev, test, scrum master, PM
+SELECT 
+    D.DepartmentID,
+    D.DepartmentName, 
+    P.PositionName, 
+    COUNT(P.PositionName) AS NumberOfEmployees
+FROM `Account` A
+INNER JOIN Department D ON A.DepartmentID = D.DepartmentID
+INNER JOIN Position P ON A.PositionID = P.PositionID
+GROUP BY D.DepartmentID, P.PositionID
+ORDER BY D.DepartmentID, P.PositionID;
+
+-- Question 12: Thông tin chi tiết của câu hỏi
+SELECT 
+    Q.QuestionID, 
+    Q.Content AS QuestionContent,
+    TQ.TypeName,
+    A.FullName AS CreatorName,
+    ANS.Content AS AnswerContent,
+    ANS.isCorrect
+FROM 
+    Question Q
+INNER JOIN 
+    TypeQuestion TQ ON Q.TypeID = TQ.TypeID
+INNER JOIN 
+    `Account` A ON A.AccountID = Q.CreatorID
+LEFT JOIN 
+    Answer ANS ON Q.QuestionID = ANS.QuestionID
+ORDER BY 
+    Q.QuestionID ASC;
+
+-- Question 13: Số lượng câu hỏi của mỗi loại tự luận hay trắc nghiệm
+SELECT 
+    TQ.TypeID, 
+    TQ.TypeName, 
+    COUNT(Q.TypeID) AS NumberOfQuestions
+FROM 
+    TypeQuestion TQ
+LEFT JOIN 
+    Question Q ON TQ.TypeID = Q.TypeID
+GROUP BY 
+    TQ.TypeID;
+
+-- Question 14: Group không có account nào (Sử dụng LEFT JOIN)
+SELECT G.* 
+FROM `Group` G
+LEFT JOIN GroupAccount GA ON G.GroupID = GA.GroupID
+WHERE GA.AccountID IS NULL;
+
+-- Question 15: Group không có account nào (Sử dụng SUBQUERY)
+SELECT * FROM `Group`  
+WHERE 
+    GroupID NOT IN (
+        SELECT GroupID 
+        FROM GroupAccount
+    );
+
+-- Question 16: Question không có answer nào
+SELECT Q.* FROM Question Q
+LEFT JOIN Answer A ON Q.QuestionID = A.QuestionID
+WHERE A.AnswerID IS NULL;
+
+-- Exercise 2: Union
+-- Question 17:
+-- a) Lấy các account thuộc nhóm thứ 1
+SELECT 
+    A.AccountID,
+    A.FullName 
+FROM `Account` A
+JOIN GroupAccount GA ON A.AccountID = GA.AccountID
+WHERE GA.GroupID = 1;
+
+-- b) Lấy các account thuộc nhóm thứ 2
+SELECT 
+    A.AccountID,
+    A.FullName 
+FROM `Account` A
+JOIN GroupAccount GA ON A.AccountID = GA.AccountID
+WHERE GA.GroupID = 2;
+
+-- c) Ghép 2 kết quả không trùng nhau
+SELECT 
+    A.AccountID,
+    A.FullName 
+FROM `Account` A
+JOIN GroupAccount GA ON A.AccountID = GA.AccountID
+WHERE GA.GroupID = 1
+UNION
+SELECT 
+    A.AccountID,
+    A.FullName 
+FROM `Account` A
+JOIN GroupAccount GA ON A.AccountID = GA.AccountID
+WHERE GA.GroupID = 2;
+
+-- Question 18:
+-- a) Lấy các group có lớn hơn 5 thành viên
+SELECT 
+    G.GroupID,
+    G.GroupName, 
+    COUNT(GA.AccountID) AS NumberOfMembers
+FROM `Group` G
+JOIN GroupAccount GA ON G.GroupID = GA.GroupID
+GROUP BY G.GroupID
+HAVING COUNT(GA.AccountID) > 3;
+
+-- b) Lấy các group có nhỏ hơn 7 thành viên
+SELECT 
+    G.GroupID,
+    G.GroupName, 
+    COUNT(GA.AccountID) AS NumberOfMembers
+FROM `Group` G
+JOIN GroupAccount GA ON G.GroupID = GA.GroupID
+GROUP BY G.GroupID
+HAVING COUNT(GA.AccountID) < 7;
+
+-- c) Ghép 2 kết quả
+SELECT 
+    G.GroupID,
+    G.GroupName, 
+    COUNT(GA.AccountID) AS NumberOfMembers
+FROM `Group` G
+JOIN GroupAccount GA ON G.GroupID = GA.GroupID
+GROUP BY G.GroupID
+HAVING COUNT(GA.AccountID) > 5
+UNION
+SELECT 
+    G.GroupID,
+    G.GroupName, 
+    COUNT(GA.AccountID) AS NumberOfMembers
+FROM `Group` G
+JOIN GroupAccount GA ON G.GroupID = GA.GroupID
+GROUP BY G.GroupID
+HAVING COUNT(GA.AccountID) < 7;
