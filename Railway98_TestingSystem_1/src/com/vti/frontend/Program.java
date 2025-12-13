@@ -203,32 +203,49 @@ public class Program {
 		// ===== QUESTION 3: In ít nhất 1 giá trị của mỗi đối tượng =====
 
 		System.out.println("=== IN THÔNG TIN CÁC ĐỐI TƯỢNG ===");
-		System.out.println("\n1. Department:");
-		System.out.println("   " + dep1.toString());
+		System.out.println("----------Department--------");
+		System.out.println("Department:" + dep1.id + " " + dep1.name);
+		System.out.println("Department:" + dep2.id + " " + dep2.name);
+		System.out.println("Department:" + dep3.id + " " + dep3.name);
 
 		System.out.println("\n2. Position:");
-		System.out.println("   " + pos1.toString());
+		System.out.println("Position:" + pos1.id + " " + pos1.name);
+		System.out.println("Position:" + pos2.id + " " + pos2.name);
+		System.out.println("Position:" + pos3.id + " " + pos3.name);
 
 		System.out.println("\n3. Account:");
-		System.out.println("   " + acc1.toString());
+		System.out.println("Account:" + acc1.id + " | " + acc1.userName + " | " + acc1.fullName + " | " + acc1.email);
+		System.out.println("Account:" + acc2.id + " | " + acc2.userName + " | " + acc2.fullName + " | " + acc2.email);
+		System.out.println("Account:" + acc3.id + " | " + acc3.userName + " | " + acc3.fullName + " | " + acc3.email);
 
 		System.out.println("\n4. Group:");
-		System.out.println("   " + group1.toString());
+		System.out.println("Group" + group1.id + ": " + group1.name);
+		System.out.println("Group" + group2.id + ": " + group2.name);
+		System.out.println("Group" + group3.id + ": " + group3.name);
 
 		System.out.println("\n5. TypeQuestion:");
-		System.out.println("   " + type1.toString());
+		System.out.println("   Type 1: " + type1.toString());
+		System.out.println("   Type 2: " + type2.toString());
+		System.out.println("   Type 3: " + type3.toString());
 
 		System.out.println("\n6. CategoryQuestion:");
-		System.out.println("   " + cate1.toString());
+		System.out.println("   Category 1: " + cate1.toString());
+		System.out.println("   Category 2: " + cate2.toString());
+		System.out.println("   Category 3: " + cate3.toString());
 
 		System.out.println("\n7. Question:");
-		System.out.println("   " + q1.toString());
+		System.out.println("   Question 1: " + q1.toString());
+		System.out.println("   Question 2: " + q2.toString());
+		System.out.println("   Question 3: " + q3.toString());
 
 		System.out.println("\n8. Answer:");
-		System.out.println("   " + ans1.toString());
+		System.out.println("   Answer 1: " + ans1.toString());
+		System.out.println("   Answer 2: " + ans2.toString());
+		System.out.println("   Answer 3: " + ans3.toString());
 
 		System.out.println("\n9. Exam:");
-		System.out.println("   " + exam1.toString());
-
+		System.out.println("   Exam 1: " + exam1.toString());
+		System.out.println("   Exam 2: " + exam2.toString());
+		System.out.println("   Exam 3: " + exam3.toString());
 	}
 }
