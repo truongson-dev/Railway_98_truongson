@@ -1,0 +1,697 @@
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Base Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Header Styles */
+.main-header {
+  width: 100%;
+}
+
+/* Top Bar */
+.top-bar {
+  background-color: #1e478d;
+  color: #ffffff;
+  padding: 10px 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.top-bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-info {
+  display: flex;
+  gap: 25px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-item i {
+  font-size: 12px;
+}
+
+.phone-number {
+  color: #ffcc00;
+  font-weight: 700;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.social-icons a {
+  color: #ffffff;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.1);
+}
+
+.social-icons .fa-tiktok {
+  color: #000;
+  background: #fff;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 14px;
+}
+
+.social-icons .fa-facebook-f {
+  color: #1877f2;
+}
+
+.social-icons .fa-youtube {
+  color: #ff0000;
+}
+
+/* Main Navigation */
+.nav-bar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 15px 0;
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo a {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  /* Adjust height as needed to match the image scale */
+  width: auto;
+  display: block;
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-links li a:hover {
+  color: #1e478d;
+}
+
+/* Search Button */
+.search-btn button {
+  background-color: #1e478d;
+  color: #ffffff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.search-btn button:hover {
+  background-color: #153266;
+}
+
+/* Main Content */
+.banner-section {
+  padding: 0;
+  background-color: #fff;
+}
+
+.hero-banner {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.why-vti-section {
+  padding: 60px 0;
+  /* Khoảng cách padding bên trong */
+  margin-top: 20px;
+  /* Khoảng cách margin với banner bên trên */
+  background-color: #fff;
+}
+
+.why-vti-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Training Program Section */
+.training-program {
+  padding: 60px 0;
+  background-color: #fdfdfd;
+}
+
+.section-title {
+  text-align: center;
+  color: #1e478d;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: #00aeef;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.course-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.course-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-name {
+  padding: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e478d;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* About Us Page Styles */
+.about-hero {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  background: #eef2f7;
+  overflow: hidden;
+}
+
+.about-banner-container {
+  width: 100%;
+  height: 100%;
+}
+
+.team-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-image: url("/VTI/IMG/banner-web-vti-ve-chung-toi.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.team-content-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px 0;
+}
+
+.breadcrumb {
+  color: #fff;
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.breadcrumb span {
+  color: #fff;
+  font-weight: 500;
+}
+
+.about-intro {
+  padding: 100px 0;
+  text-align: center;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-title-wrapper {
+  position: relative;
+  margin-bottom: 60px;
+}
+
+.bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 140px;
+  font-weight: 900;
+  color: #f1f4f9;
+  z-index: 1;
+  letter-spacing: 15px;
+  white-space: nowrap;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.sub-title {
+  position: relative;
+  z-index: 2;
+  font-size: 28px;
+  font-weight: 600;
+  color: #00aeef;
+  margin-bottom: 10px;
+}
+
+.main-title {
+  position: relative;
+  z-index: 2;
+  font-size: 60px;
+  font-weight: 800;
+  color: #1e478d;
+  margin: 0;
+}
+
+.intro-content-box {
+  background-color: #1e478d;
+  color: #fff;
+  padding: 50px 70px;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(30, 71, 141, 0.2);
+  z-index: 3;
+}
+
+.intro-content-box::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #1e478d;
+}
+
+.intro-content-box p {
+  font-size: 18px;
+  line-height: 2;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Active Nav State */
+.nav-links li a.active {
+  color: #1e478d;
+  font-weight: 700;
+  position: relative;
+}
+
+.nav-links li a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #1e478d;
+}
+
+/* Vision/Mission Section */
+.about-vision-mission {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.mission-item {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 80px;
+}
+
+.mission-item.reversed {
+  flex-direction: row-reverse;
+}
+
+.mission-img {
+  flex: 1;
+  max-width: 500px;
+}
+
+.mission-img img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.mission-content {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.mission-number {
+  background-color: #1e478d;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 5px;
+  position: relative;
+}
+
+.mission-number::after {
+  content: "....";
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  color: #cbd5e0;
+  letter-spacing: 2px;
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.mission-text {
+  flex: 1;
+}
+
+.mission-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #1e478d;
+  margin: 0 0 15px 0;
+}
+
+.mission-item.reversed .mission-text {
+  text-align: right;
+}
+
+.mission-item.reversed .mission-content {
+  flex-direction: row-reverse;
+}
+
+.mission-text p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #4a5568;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+    /* In a real app, you'd add a mobile menu icon */
+  }
+
+  .contact-info {
+    gap: 10px;
+    font-size: 11px;
+  }
+}
+
+/* Footer Styles */
+.main-footer {
+  background-color: #f5f8fc;
+  color: #444;
+  padding-top: 60px;
+  font-size: 14px;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: 1.2fr 1.1fr 1.2fr 1fr;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.footer-col h4 {
+  color: #333;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.address-list {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.address-list li {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  align-items: flex-start;
+}
+
+.address-list li i {
+  color: #cbd5e0;
+  font-size: 14px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.address-list li a {
+  color: #00aeef;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.address-list li a:hover {
+  text-decoration: underline;
+}
+
+.footer-col .hotline {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 25px;
+}
+
+.footer-col .hotline i {
+  color: #cbd5e0;
+}
+
+/* Facebook Plugin Mockup */
+.fb-mockup {
+  background: #f1f2f6;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.fb-header {
+  background: white;
+  padding: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.fb-logo-small {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  border: 1px solid #eee;
+}
+
+.fb-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.fb-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: #385898;
+}
+
+.fb-name i {
+  color: #1877f2;
+}
+
+.fb-followers {
+  font-size: 11px;
+  color: #606770;
+}
+
+.fb-actions {
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.fb-btn {
+  background: #f5f6f7;
+  border: 1px solid #ccd0d5;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b4f56;
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.fb-btn:hover {
+  background: #ebedf0;
+}
+
+/* Footer Social Icons */
+.footer-social-icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.footer-social-icons a {
+  font-size: 32px;
+  transition: transform 0.3s ease;
+}
+
+.footer-social-icons a:hover {
+  transform: translateY(-3px);
+}
+
+.footer-social-icons .tiktok-link {
+  color: #000;
+}
+
+.footer-social-icons .facebook-link {
+  color: #1877f2;
+}
+
+.footer-social-icons .youtube-link {
+  color: #ff0000;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  background-color: #1e478d;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Responsive Footer */
+@media (max-width: 991px) {
+  .footer-cols {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  .footer-cols {
+    grid-template-columns: 1fr;
+  }
+}

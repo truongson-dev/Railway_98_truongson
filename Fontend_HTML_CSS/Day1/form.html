@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tạo mới Account</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Tạo mới Account</h2>
+
+      <form>
+        <fieldset>
+          <legend>Thông tin cơ bản</legend>
+
+          <label>Email:</label>
+          <input type="email" placeholder="input email" /><br />
+
+          <label>Username:</label>
+          <input type="text" placeholder="Input Username" /><br />
+
+          <label>Fullname:</label>
+          <input type="text" placeholder="Input Fullname" /><br />
+
+          <label>Department:</label>
+          <select>
+            <option>-- Select Department --</option>
+            <option value="1">Test</option>
+            <option value="2">IT</option>
+            <option value="3">HR</option></select
+          ><br />
+
+          <label>Select a Position:</label>
+          <select>
+            <option>-- Select Position --</option>
+            <option value="Manager">Manager</option>
+            <option value="Staff">Staff</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+          <legend>Thông tin bổ sung</legend>
+
+          <label>Giới tính</label><br />
+          <div class="radio-group">
+            <input type="radio" name="gender" checked /> Male<br />
+            <input type="radio" name="gender" /> FeMale<br />
+            <input type="radio" name="gender" /> Other
+          </div>
+
+          <label>Sở thích:</label><br />
+          <div class="checkbox-group">
+            <input type="checkbox" name="hobby" /> Ăn uống<br />
+            <input type="checkbox" name="hobby" /> Âm nhạc<br />
+            <input type="checkbox" name="hobby" /> Thể thao<br />
+            <input type="checkbox" name="hobby" /> Đọc sách
+          </div>
+
+          <label for="">Ảnh đại diện:</label><br />
+          <input type="file" />
+        </fieldset>
+
+        <button>Create</button>
+        <button>Reset</button>
+      </form>
+    </div>
+  </body>
+</html>

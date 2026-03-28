@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Account Page</title>
+
+
+    <!-- Latest compiled and minified CSS & JS -->
+    <!-- bs-cdn -->
+    <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script> -->
+</head>
+
+<body>
+    <div class="container">
+        <!-- Nhập thông tin -->
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <form>
+                    <legend style="font-weight: bold">Quản lý nhân viên</legend>
+                    <!-- ID -->
+                    <div class="form-group">
+                        <label for="">ID: </label>
+                        <input type="number" required="true" class="form-control" id="ID_ID" value=""
+                            placeholder="Enter Id" />
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="">Email: </label>
+                        <input type="email" required="true" class="form-control" id="Email_ID" value=""
+                            placeholder="Enter Email" />
+                    </div>
+
+
+                    <!-- Username -->
+                    <div class="form-group">
+                        <label for="">Username: </label>
+                        <input type="text" required="true" class="form-control" id="Username_ID" value=""
+                            placeholder="Enter Username" />
+                    </div>
+
+
+                    <!-- Fullname -->
+                    <div class="form-group">
+                        <label for="">Fullname: </label>
+                        <input type="text" required="true" class="form-control" id="Fullname_ID" value=""
+                            placeholder="Enter Fullname" />
+                    </div>
+
+
+                    <!-- Department -->
+                    <div class="form-group">
+                        <label for="sel1">Select a Department:</label>
+                        <select class="form-control" id="Department_ID">
+                            <option>--Select a Department--</option>
+                            <option>Accounting</option>
+                            <option>Business Development</option>
+                            <option>Engineering</option>
+                            <option>Human Resources</option>
+                            <option>Research and Development</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Position -->
+                    <div class="form-group">
+                        <label for="sel1">Select a Position:</label>
+                        <select class="form-control" id="Position_ID">
+                            <option>--Select a Position--</option>
+                            <option>Developer</option>
+                            <option>Tester</option>
+                            <option>Scrum Master</option>
+                            <option>PM</option>
+                        </select>
+                    </div>
+                    <!-- Cretate Date -->
+                    <div class="form-group">
+                        <label for="">Cretate Date: </label>
+                        <input type="date" required="true" class="form-control" id="Cretate_Date_ID" value="" />
+                    </div>
+
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <input type="button" class="btn btn-success" id="save_btn" value="Save" />
+                        <input type="button" class="btn btn-warning" id="update_btn" value="Update" />
+                        <input type="button" class="btn btn-danger" id="reset_btn" value="Reset" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Hiển thị kết quả -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <table class="table table-hover">
+                    <thead>
+                        <!-- Tiêu đề -->
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Fullname</th>
+                            <th>Department</th>
+                            <th>Position</th>
+                            <th>Cretate Date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Result_TB">
+                        <!-- Nội dung -->
+                        <!-- 1 -->
+                        <!-- <tr>
+                <td>1</td>
+                <td>daonq@gmail.com</td>
+                <td>daonq</td>
+                <td>Nguyễn Đạo</td>
+                <td>Sale</td>
+                <td>Dev</td>
+                <td>17-10-2021</td>
+                <td>
+                  <button type="button" class="btn btn-warning">Edit</button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+              </tr> -->
+                        <!-- 2 -->
+                        <!-- <tr>
+                <td>1</td>
+                <td>daonq@gmail.com</td>
+                <td>daonq</td>
+                <td>Nguyễn Đạo</td>
+                <td>Sale</td>
+                <td>Dev</td>
+                <td>17-10-2021</td>
+                <td>
+                  <button type="button" class="btn btn-warning">Edit</button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+              </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- Import JS -->
+<script type="text/javascript" src="./HRMDemo.js"></script>
+
+</html>
