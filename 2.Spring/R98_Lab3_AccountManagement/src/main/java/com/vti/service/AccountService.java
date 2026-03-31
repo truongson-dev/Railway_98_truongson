@@ -1,8 +1,8 @@
 package com.vti.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.vti.entity.Account;
@@ -24,29 +24,28 @@ public class AccountService implements IAccountService {
 	private IPossitionRepository possitionRepository;
 
 	@Override
-	public List<Account> getAllAccount() {
+	public Page<Account> getAllAccount(Pageable pageable) {
 		// TODO Auto-generated method stub
-		return accountRepository.findAll();
+		return accountRepository.findAll(pageable);
 	}
 
 	@Override
 	public Account getAccountById(short id) {
 		// TODO Auto-generated method stub
-		return accountRepository.findById(id).get();
+		return accountRepository.getById(id);
 	}
 
 	@Override
 	public void deleteAccount(short id) {
-		if (accountRepository.existsById(id)) {
-			accountRepository.deleteById(id);
-		}
+		accountRepository.deleteById(id);
+
 	}
 
 	@Override
 	public void createAccount(AccountFormForCreating form) {
 		Account account = new Account();
-		Department department = departmentRepository.findById(form.getDepartmentId()).get();
-		Position position = possitionRepository.findById(form.getPositionId()).get();
+		Department department = departmentRepository.getById(form.getDepartmentId());
+		Position position = possitionRepository.getById(form.getPositionId());
 		account.setEmail(form.getEmail());
 		account.setUsername(form.getUsername());
 		account.setFullname(form.getFullname());
@@ -57,9 +56,9 @@ public class AccountService implements IAccountService {
 
 	@Override
 	public void updateAccount(short id, AccountFormForUpdating form) {
-		Account account = accountRepository.findById(id).get();
-		Department department = departmentRepository.findById(form.getDepartmentId()).get();
-		Position position = possitionRepository.findById(form.getPositionId()).get();
+		Account account = accountRepository.getById(id);
+		Department department = departmentRepository.getById(form.getDepartmentId());
+		Position position = possitionRepository.getById(form.getPositionId());
 		account.setFullname(form.getFullname());
 		account.setDepartment(department);
 		account.setPosition(position);
@@ -67,3 +66,4 @@ public class AccountService implements IAccountService {
 	}
 
 }
+
