@@ -1,7 +1,9 @@
 console.log("HRM");
 // Khai báo mảng global để lưu trữ danh sách tài khoản
 var listAccount = [];
-
+// Khai báo 2 biến curentPage và curentSize để lưu trữ thông tin phân trang
+var curentPage = 1; //Trang hiện tại
+var curentSize = 5; //Số lượng bản ghi trên mỗi trang
 // Tự động load dữ liệu khi trang web sẵn sàng
 getListAccount();
 getListDepartment();
@@ -11,18 +13,39 @@ getListPosition();
 function getListAccount() {
   $.ajax({
     type: "GET",
-    url: "http://localhost:8080/api/v1/accounts",
+    // url:
+    //   "http://localhost:8080/api/v1/accounts?size=" + curentSize + "&page= " +curentPage,
+    url: `http://localhost:8080/api/v1/accounts?size=${curentSize}"&page=${curentPage}`,
+
     // data: "data",
     dataType: "json",
     success: function (response) {
       //
       console.log("Response API: ", response);
       // Gán dữ liệu vào listAccount
-      listAccount = response;
+      listAccount = response.content;
       // Hiển thị dữ liệu ở bảng kết quả
       showListAccount();
+      // Hiển thị thông tin phân trang
+      var totalPages = response.totalPages; // Tổng số trang
+      pagingTable(totalPages);
+      //
     },
   });
+}
+// hàm hiển thị thông tin phân trang
+function pagingTable(totalPages) {
+  for (let index = 1; index <= totalPages; index++) {
+    if (index == curentPage) {
+      $("#pagination_Id").append(`
+        <li class="active"><a href="#">${index}</a></li>
+      `);
+    } else {
+      $("#pagination_Id").append(`
+        <li><a href="#">${index}</a></li>
+      `);
+    }
+  }
 }
 //
 function getListDepartment() {
@@ -162,7 +185,8 @@ function handleDelete(indexParam) {
     // listAccount.splice(indexParam, 1);
     $.ajax({
       type: "DELETE",
-      url: "http://localhost:8080/api/v1/accounts/" + listAccount[indexParam].id,
+      url:
+        "http://localhost:8080/api/v1/accounts/" + listAccount[indexParam].id,
       success: function (response) {
         getListAccount();
       },
