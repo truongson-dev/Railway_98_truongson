@@ -14,7 +14,12 @@ public class DepartmentService implements IDepartmentService {
 	@Autowired
 	private IDepartmentRepository departmentRepository;
 
+	@Override
 	public List<Department> getAllDepartments() {
+//		Danh sách phòng ban
+//		List<Department> listDepartments = departmentRepository.findAll();
+//		return listDepartments;
+
 		return departmentRepository.findAll();
 	}
 

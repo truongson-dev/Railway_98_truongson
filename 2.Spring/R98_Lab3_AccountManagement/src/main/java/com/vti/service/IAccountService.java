@@ -8,20 +8,17 @@ import com.vti.form.AccountFormForCreating;
 import com.vti.form.AccountFormForUpdating;
 
 public interface IAccountService {
-	public Page<Account> getAllAccount(Pageable pageable);
 
-	public Account getAccountById(short id);
-//
-//	public Account getAccountByName(String name);
-//
-	public void createAccount(AccountFormForCreating form);
+	Page<Account> getAllAccount(Pageable pageable, String search);
 
-	public void updateAccount(short id, AccountFormForUpdating form);
+	Account getAccountByID(short id);
 
-	public void deleteAccount(short id);
-//
-//	public boolean isAccountExistsByID(short id);
-//
-//	public boolean isAccountExistsByName(String name);
+	Account createAccount(AccountFormForCreating form);
+
+	Account updateAccount(short id, AccountFormForUpdating form);
+
+	void deleteAccount(short id);
+
+	Account getAccountByEmail(String email);
+
 }
-

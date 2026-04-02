@@ -8,7 +8,7 @@ public class AccountFormForCreating {
 	private short positionId;
 
 	public AccountFormForCreating() {
-
+		super();
 	}
 
 	public String getEmail() {

@@ -6,6 +6,6 @@ import com.vti.entity.Department;
 
 public interface IDepartmentService {
 
-	public List<Department> getAllDepartments();
+	List<Department> getAllDepartments();
 
 }

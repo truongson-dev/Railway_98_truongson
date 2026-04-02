@@ -15,8 +15,8 @@ public class PossitionService implements IPossitionService {
 	private IPossitionRepository possitionRepository;
 
 	@Override
-	public List<Position> getAllPossition() {
-		// TODO Auto-generated method stub
+	public List<Position> getAllPossitons() {
+
 		return possitionRepository.findAll();
 	}
 

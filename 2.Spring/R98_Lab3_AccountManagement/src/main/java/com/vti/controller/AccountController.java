@@ -9,13 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vti.dto.AccontDto;
@@ -33,57 +33,118 @@ public class AccountController {
 	private IAccountService accountService;
 
 	@GetMapping()
-	public ResponseEntity<?> getAllAccount(Pageable pageable) {
-		Page<Account> p = accountService.getAllAccount(pageable);
+	public ResponseEntity<?> getAllAccount(Pageable pageable, @RequestParam(required = false) String search) {
+		Page<Account> pageAccounts = accountService.getAllAccount(pageable, search);
 
-		// convert entities --> dtos
-		// https://stackoverflow.com/questions/39036771/how-to-map-pageobjectentity-to-pageobjectdto-in-spring-data-rest
-		Page<AccontDto> dtoPage = p.map(new Function<Account, AccontDto>() {
+//		List<AccontDto> listaAccontDtos = new ArrayList<>();
+//		for (Account account : listaAccounts) {
+//			AccontDto accontDto = new AccontDto();
+//			accontDto.setId(account.getId());
+//			accontDto.setEmail(account.getEmail());
+//			accontDto.setFullname(account.getFullname());
+//			accontDto.setUsername(account.getUsername());
+//			accontDto.setDepartment(account.getDepartment().getName());
+//			accontDto.setPosition(account.getPosition().getName().toString());
+//			accontDto.setCreateDate(account.getCreateDate());
+//
+//			listaAccontDtos.add(accontDto);
+//		}
+
+		Page<AccontDto> pageAccountDtos = pageAccounts.map(new Function<Account, AccontDto>() {
+
 			@Override
 			public AccontDto apply(Account account) {
-				AccontDto dto = new AccontDto(account.getId(), account.getEmail(), account.getUsername(),
-						account.getFullname(), account.getDepartment().getName(),
-						account.getPosition().getName().toString(), account.getCreateDate());
-				// AccontDto dto = new AccontDto();
-				// dto.setId(account.getId());
-				// dto.setEmail(account.getEmail());
-				// dto.setUsername(account.getUsername());
-				// dto.setFullname(account.getFullname());
-				// dto.setDepartment(account.getDepartment().getName());
-				// dto.setPosition(account.getPosition().toString());
-				// dto.setCreateDate(account.getCreateDate());
-				return dto;
+				AccontDto accontDto = new AccontDto();
+				accontDto.setId(account.getId());
+				accontDto.setEmail(account.getEmail());
+				accontDto.setFullname(account.getFullname());
+				accontDto.setUsername(account.getUsername());
+				accontDto.setDepartment(account.getDepartment().getName());
+				accontDto.setPosition(account.getPosition().getName().toString());
+				accontDto.setCreateDate(account.getCreateDate());
+				return accontDto;
 			}
 		});
 
-		return new ResponseEntity<>(dtoPage, HttpStatus.OK);
+		return new ResponseEntity<>(pageAccountDtos, HttpStatus.OK);
 	}
 
+//	Tìm kiếm Account theo ID
+//	http://localhost:8081/api/v1/accounts/1
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<?> getAccountByID(@PathVariable(name = "id") short id) {
-		Account account = accountService.getAccountById(id);
-		AccontDto dto = new AccontDto(account.getId(), account.getEmail(), account.getUsername(), account.getFullname(),
-				account.getDepartment().getName(), account.getPosition().getName().toString(), account.getCreateDate());
-		return new ResponseEntity<AccontDto>(dto, HttpStatus.OK);
+		Account account = accountService.getAccountByID(id);
+
+		AccontDto accontDto = new AccontDto();
+		accontDto.setId(account.getId());
+		accontDto.setEmail(account.getEmail());
+		accontDto.setFullname(account.getFullname());
+		accontDto.setUsername(account.getUsername());
+		accontDto.setDepartment(account.getDepartment().getName());
+		accontDto.setPosition(account.getPosition().getName().toString());
+		accontDto.setCreateDate(account.getCreateDate());
+		return new ResponseEntity<>(accontDto, HttpStatus.OK);
 	}
 
-	@PostMapping()
-	public ResponseEntity<?> createDepartment(@RequestBody AccountFormForCreating form) {
-		accountService.createAccount(form);
-		return new ResponseEntity<String>("Create successfully!", HttpStatus.CREATED);
+//	Tìm kiếm Account theo Email
+//	http://localhost:8080/api/v1/accounts/email/daonq@gmail.com
+	@GetMapping(value = "/email/{email}")
+	public ResponseEntity<?> getAccountByEmail(@PathVariable(name = "email") String email) {
+		Account account = accountService.getAccountByEmail(email);
+
+		AccontDto accontDto = new AccontDto();
+		accontDto.setId(account.getId());
+		accontDto.setEmail(account.getEmail());
+		accontDto.setFullname(account.getFullname());
+		accontDto.setUsername(account.getUsername());
+		accontDto.setDepartment(account.getDepartment().getName());
+		accontDto.setPosition(account.getPosition().getName().toString());
+		accontDto.setCreateDate(account.getCreateDate());
+		return new ResponseEntity<>(accontDto, HttpStatus.OK);
 	}
 
+//	Tạo mới Account
+	@PostMapping
+	public ResponseEntity<?> createAccount(@RequestBody AccountFormForCreating form) {
+		Account account = accountService.createAccount(form);
+		AccontDto accontDto = new AccontDto();
+
+		accontDto.setId(account.getId());
+		accontDto.setEmail(account.getEmail());
+		accontDto.setFullname(account.getFullname());
+		accontDto.setUsername(account.getUsername());
+		accontDto.setDepartment(account.getDepartment().getName());
+		accontDto.setPosition(account.getPosition().getName().toString());
+		accontDto.setCreateDate(account.getCreateDate());
+
+		return new ResponseEntity<>(accontDto, HttpStatus.OK);
+	}
+
+// Cập nhật Account
+//	http://localhost:8081/api/v1/accounts/1
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> updateDepartment(@PathVariable(name = "id") short id,
+	public ResponseEntity<?> updateAccount(@PathVariable(name = "id") short id,
 			@RequestBody AccountFormForUpdating form) {
-		accountService.updateAccount(id, form);
-		return new ResponseEntity<String>("Update successfully!", HttpStatus.OK);
+		Account account = accountService.updateAccount(id, form);
+		AccontDto accontDto = new AccontDto();
+
+		accontDto.setId(account.getId());
+		accontDto.setEmail(account.getEmail());
+		accontDto.setFullname(account.getFullname());
+		accontDto.setUsername(account.getUsername());
+		accontDto.setDepartment(account.getDepartment().getName());
+		accontDto.setPosition(account.getPosition().getName().toString());
+		accontDto.setCreateDate(account.getCreateDate());
+
+		return new ResponseEntity<>(accontDto, HttpStatus.OK);
 	}
 
+	// Xóa Account
+//		http://localhost:8081/api/v1/accounts/5
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> deleteAccount(@PathVariable(name = "id") short id) {
 		accountService.deleteAccount(id);
-		return new ResponseEntity<String>("Delete successfully!", HttpStatus.OK);
+		return new ResponseEntity<>("Delete successfully!", HttpStatus.OK);
 	}
 
 }

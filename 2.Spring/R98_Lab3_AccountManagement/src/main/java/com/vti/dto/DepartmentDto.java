@@ -5,8 +5,16 @@ public class DepartmentDto {
 
 	private String name;
 
-	public DepartmentDto(short id, String name) {
-		this.id = id;
+	public DepartmentDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
 
@@ -14,8 +22,8 @@ public class DepartmentDto {
 		return id;
 	}
 
-	public String getName() {
-		return name;
+	public void setId(short id) {
+		this.id = id;
 	}
 
 }

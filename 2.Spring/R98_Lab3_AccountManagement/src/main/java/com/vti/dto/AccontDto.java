@@ -15,18 +15,8 @@ public class AccontDto {
 	private Date createDate;
 
 	public AccontDto() {
-	}
-
-	public AccontDto(short id, String email, String username, String fullname, String department, String position,
-			Date createDate) {
 		super();
-		this.id = id;
-		this.email = email;
-		this.username = username;
-		this.fullname = fullname;
-		this.department = department;
-		this.position = position;
-		this.createDate = createDate;
+		// TODO Auto-generated constructor stub
 	}
 
 	public short getId() {

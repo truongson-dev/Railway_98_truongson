@@ -1,7 +1,6 @@
 package com.vti.form;
 
 public class AccountFormForUpdating {
-
 	private String fullname;
 	private short departmentId;
 	private short positionId;

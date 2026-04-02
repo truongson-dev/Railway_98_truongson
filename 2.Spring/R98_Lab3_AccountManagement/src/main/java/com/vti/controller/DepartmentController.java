@@ -25,17 +25,17 @@ public class DepartmentController {
 
 	@GetMapping()
 	public ResponseEntity<?> getAllDepartments() {
-		List<Department> entities = departmentService.getAllDepartments();
+//		Danh sách phòng ban API cho FE
+		List<Department> listDepartments = departmentService.getAllDepartments();
 
-		List<DepartmentDto> dtos = new ArrayList<>();
-
-		// convert entities --> dtos
-		for (Department entity : entities) {
-			DepartmentDto dto = new DepartmentDto(entity.getId(), entity.getName());
-			dtos.add(dto);
+//		DTO: Data Transfer Object: department(id, name)  ==> departmentDTO(name)
+		List<DepartmentDto> listdeDepartmentDtos = new ArrayList<>();
+		for (Department department : listDepartments) {
+			DepartmentDto departmentDto = new DepartmentDto();
+			departmentDto.setId(department.getId());
+			departmentDto.setName(department.getName());
+			listdeDepartmentDtos.add(departmentDto);
 		}
-
-		return new ResponseEntity<>(dtos, HttpStatus.OK);
+		return new ResponseEntity<>(listdeDepartmentDtos, HttpStatus.OK);
 	}
-
 }

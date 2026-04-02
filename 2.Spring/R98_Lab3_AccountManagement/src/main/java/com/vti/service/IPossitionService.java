@@ -6,6 +6,6 @@ import com.vti.entity.Position;
 
 public interface IPossitionService {
 
-	public List<Position> getAllPossition();
+	List<Position> getAllPossitons();
 
 }

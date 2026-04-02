@@ -12,7 +12,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Department")
+@Table(name = "Department", catalog = "TestingSystem_R98")
 public class Department implements Serializable {
 
 	@Column(name = "DepartmentID")
@@ -23,8 +23,7 @@ public class Department implements Serializable {
 	@Column(name = "DepartmentName", length = 30, nullable = false, unique = true)
 	private String name;
 
-	@OneToMany(mappedBy = "department", fetch = jakarta.persistence.FetchType.EAGER)
-	@org.hibernate.annotations.Cascade(value = { org.hibernate.annotations.CascadeType.REMOVE, org.hibernate.annotations.CascadeType.SAVE_UPDATE })
+	@OneToMany(mappedBy = "department")
 	private List<Account> account;
 
 	public Department() {

@@ -17,7 +17,7 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "`Account`")
+@Table(name = "`Account`", catalog = "TestingSystem_R98")
 public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;

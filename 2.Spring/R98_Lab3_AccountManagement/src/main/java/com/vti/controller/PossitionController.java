@@ -23,18 +23,19 @@ public class PossitionController {
 	@Autowired
 	private IPossitionService possitionService;
 
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<?> getAllPossitons() {
-		List<Position> entities = possitionService.getAllPossition();
+		List<Position> listPositions = possitionService.getAllPossitons();
 
-		List<PossitonDto> dtos = new ArrayList<>();
-
-		for (Position entity : entities) {
-			PossitonDto dto = new PossitonDto(entity.getId(), entity.getName().toString());
-			dtos.add(dto);
+		List<PossitonDto> listpPossitonDtos = new ArrayList<>();
+// Chuyển đổi sang DTO
+		for (Position position : listPositions) {
+			PossitonDto possitonDto = new PossitonDto();
+			possitonDto.setId(position.getId());
+			possitonDto.setName(position.getName().toString());
+			listpPossitonDtos.add(possitonDto);
 		}
-
-		return new ResponseEntity<>(dtos, HttpStatus.OK);
+		return new ResponseEntity<>(listpPossitonDtos, HttpStatus.OK);
 	}
 
 }
