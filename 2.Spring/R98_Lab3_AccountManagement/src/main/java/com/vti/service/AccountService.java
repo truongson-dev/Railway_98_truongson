@@ -30,17 +30,17 @@ public class AccountService implements IAccountService {
 
 	@Override
 	public Page<Account> getAllAccount(Pageable pageable, String search) {
-//		Where
+		// Where
 		Specification<Account> where = null;
 
-//			fullname like search
-//		or	email like seach
-//		or  department like search
+		// fullname like search
+		// or email like seach
+		// or department like search
 		if (!StringUtils.isEmpty(search)) {
 			AccountSpecification fullnameSpecification = new AccountSpecification("fullname", "LIKE", search);
 			AccountSpecification emailSpecification = new AccountSpecification("email", "LIKE", search);
-//			AccountSpecification departmentSpecification = new AccountSpecification("department", "LIKE", search);
-			where = Specification.where(fullnameSpecification).or(emailSpecification);
+			AccountSpecification departmentSpecification = new AccountSpecification("department.name", "LIKE", search);
+			where = Specification.where(fullnameSpecification).or(emailSpecification).or(departmentSpecification);
 		}
 
 		return accountRepository.findAll(where, pageable);
@@ -59,11 +59,11 @@ public class AccountService implements IAccountService {
 		account.setUsername(form.getUsername());
 		account.setFullname(form.getFullname());
 
-//		Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
+		// Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
 		Department department = departmentRepository.getById(form.getDepartmentId());
 		account.setDepartment(department);
 
-//		Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
+		// Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
 		Position position = possitionRepository.getById(form.getPositionId());
 		account.setPosition(position);
 
