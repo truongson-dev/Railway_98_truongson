@@ -8,9 +8,9 @@
 
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="//code.jquery.com/jquery.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -86,7 +86,17 @@
         </form>
       </div>
     </div>
+    <!-- Form tìm kiếm  -->
+    <br />
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <input type="text" class="form-control" id="Search_ID"
+          placeholder="Input Search: Fullnane, Email, Department" />
 
+        <button type="button" class="btn btn-primary" onclick="handleSearch()">Search</button>
+      </div>
+    </div>
+    <br />
     <!-- Hiển thị kết quả -->
 
     <div class="row">
@@ -96,33 +106,33 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th style="cursor: pointer;" onclick="changeSort('id')">
+              <th>
                 ID
-                <i id="sort_id" class="fa fa-fw fa-sort"></i>
+                <i class="fa fa-fw fa-sort" onclick="changeSort('id')"></i>
               </th>
-              <th style="cursor: pointer;" onclick="changeSort('email')">
+              <th>
                 Email
-                <i id="sort_email" class="fa fa-fw fa-sort"></i>
+                <i class="fa fa-fw fa-sort" onclick="changeSort('email')"></i>
               </th>
-              <th style="cursor: pointer;" onclick="changeSort('username')">
+              <th>
                 Username
-                <i id="sort_username" class="fa fa-fw fa-sort"></i>
+                <i class="fa fa-fw fa-sort" onclick="changeSort('username')"></i>
               </th>
-              <th style="cursor: pointer;" onclick="changeSort('fullname')">
+              <th>
                 Fullname
-                <i id="sort_fullname" class="fa fa-fw fa-sort"></i>
+                <i class="fa fa-fw fa-sort" onclick="changeSort('fullname')"></i>
               </th>
-              <th style="cursor: pointer;" onclick="changeSort('department.name')">
+              <th>
                 Department
-                <i id="sort_department.name" class="fa fa-fw fa-sort"></i>
+                <i class="fa fa-fw fa-sort" onclick="changeSort('department')"></i>
               </th>
-              <th style="cursor: pointer;" onclick="changeSort('position.name')">
+              <th>
                 Position
-                <i id="sort_position.name" class="fa fa-fw fa-sort"></i>
+                <i class="fa fa-fw fa-sort" onclick="changeSort('position')"></i>
               </th>
-              <th style="cursor: pointer;" onclick="changeSort('createDate')">
+              <th>
                 Cretate Date
-                <i id="sort_createDate" class="fa fa-fw fa-sort"></i>
+                <i class="fa fa-fw fa-sort" onclick="changeSort('createDate')"></i>
               </th>
               <th>Edit</th>
               <th>Delete</th>

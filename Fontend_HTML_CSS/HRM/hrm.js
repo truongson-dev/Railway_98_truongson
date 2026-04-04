@@ -6,18 +6,32 @@ var listPossition = [];
 // Khai báo 2 biến curentPage va curentSize để lưu trữ thông tin phân trang
 var curentPage = 1; // Trang hiện tại, mặc định là trang 1
 var curentSize = 5; // Số lượng bản ghi trên mỗi trang, mặc định là 5
-var sortField = "id"; // Trường sắp xếp mặc định là id
-var isAsc = true; // Kiểu sắp xếp mặc định là asc
+// Khai báo biến để sort dữ liệu
+var sortField = "id"; // Mặc định sort theo id
+var isAsc = true; // Mặc định sort theo thứ tự tăng dần (asc)
 // Load dữ liệu API Account
 getListAccount();
 getListDepartment();
 getListPosition();
 //
 function getListAccount(params) {
+  // Xây dựng đương link url
+  let v_url = "";
+  if (isAsc == true) {
+    v_url = `http://localhost:8080/api/v1/accounts?size=${curentSize}&page=${curentPage}&sort=${sortField},asc`;
+  } else {
+    v_url = `http://localhost:8080/api/v1/accounts?size=${curentSize}&page=${curentPage}&sort=${sortField},desc`;
+  }
+
+  var v_search = $("#Search_ID").val();
+  if (v_search) {
+    v_url = v_url + `&search=${v_search}`;
+  }
+  //
   $.ajax({
     type: "GET",
     // url: "http://localhost:8080/api/v1/accounts?size=" + curentSize + "&page=" + curentPage,
-    url: `http://localhost:8080/api/v1/accounts?size=${curentSize}&page=${curentPage}&sort=${sortField},${isAsc ? "asc" : "desc"}`,
+    url: v_url,
     // data: "data",
     dataType: "json",
     success: function (response) {
@@ -31,9 +45,6 @@ function getListAccount(params) {
       // Hiển thị thông tin phân trang
       var totalPages = response.totalPages; // Tổng số trang
       pagingTable(totalPages);
-      //
-      // Cập nhật icon sắp xếp
-      updateSortIcons();
       //
     },
   });
@@ -87,7 +98,6 @@ function handleNext() {
   getListAccount();
 }
 
-// Hàm xử lý khi nhấn vào header để sắp xếp
 // Hàm xử lý sort dữ liệu
 function changeSort(fieldParam) {
   if (sortField == fieldParam) {
@@ -96,26 +106,14 @@ function changeSort(fieldParam) {
     sortField = fieldParam;
     isAsc = true;
   }
+
   getListAccount();
 }
-
-// Hàm cập nhật icon sắp xếp
-function updateSortIcons() {
-  // Reset tất cả các icon về mặc định
-  const fields = ["id", "email", "username", "fullname", "department.name", "position.name", "createDate"];
-  fields.forEach(field => {
-    // Sử dụng document.getElementById vì tên field có dấu chấm (.) nên jq selective có thể nhầm lẫn
-    $(document.getElementById(`sort_${field}`)).attr("class", "fa fa-fw fa-sort");
-  });
-
-  // Cập nhật icon cho trường hiện tại
-  if (isAsc) {
-    $(document.getElementById(`sort_${sortField}`)).attr("class", "fa fa-fw fa-sort-asc");
-  } else {
-    $(document.getElementById(`sort_${sortField}`)).attr("class", "fa fa-fw fa-sort-desc");
-  }
+// Hàm xử lý sự kiện khi người dùng nhấn nút Search
+function handleSearch() {
+  getListAccount();
 }
-
+//
 function getListDepartment(params) {
   // Lấy dữ liệu API Department
   $.ajax({
