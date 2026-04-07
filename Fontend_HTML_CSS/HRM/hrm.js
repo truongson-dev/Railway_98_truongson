@@ -34,6 +34,12 @@ function getListAccount(params) {
     url: v_url,
     // data: "data",
     dataType: "json",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader(
+        "Authorization",
+        "Basic " + btoa("Username1:123456"),
+      );
+    },
     success: function (response) {
       //
       console.log("Response API: ", response);
