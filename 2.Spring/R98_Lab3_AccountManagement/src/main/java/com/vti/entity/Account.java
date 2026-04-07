@@ -49,6 +49,9 @@ public class Account implements Serializable {
 	@CreationTimestamp
 	private Date createDate;
 
+	@Column(name = "password", length = 800)
+	private String password;
+
 	public Account() {
 		super();
 	}
@@ -149,6 +152,14 @@ public class Account implements Serializable {
 	 */
 	public void setPosition(Position position) {
 		this.position = position;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override

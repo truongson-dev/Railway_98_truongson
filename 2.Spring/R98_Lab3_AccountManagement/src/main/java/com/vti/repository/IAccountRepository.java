@@ -10,9 +10,11 @@ import com.vti.entity.Account;
 public interface IAccountRepository extends JpaRepository<Account, Short>, JpaSpecificationExecutor<Account> {
 	Optional<Account> findByEmail(String email);
 
-	Optional<Account> findByUsername(String username);
+//	Optional<Account> findByUsername(String username);
 
 	Optional<Account> findByUsernameOrEmail(String username, String email);
 
 	Optional<Account> findByUsernameAndEmail(String username, String email);
+
+	public Account findByUsername(String username);
 }

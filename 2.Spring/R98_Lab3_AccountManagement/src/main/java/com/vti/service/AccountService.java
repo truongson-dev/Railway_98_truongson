@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -30,16 +34,17 @@ public class AccountService implements IAccountService {
 
 	@Override
 	public Page<Account> getAllAccount(Pageable pageable, String search) {
-		// Where
+//		Where
 		Specification<Account> where = null;
 
-		// fullname like search
-		// or email like seach
-		// or department like search
+//			fullname like search
+//		or	email like seach
+//		or  department like search
 		if (!StringUtils.isEmpty(search)) {
 			AccountSpecification fullnameSpecification = new AccountSpecification("fullname", "LIKE", search);
 			AccountSpecification emailSpecification = new AccountSpecification("email", "LIKE", search);
-			AccountSpecification departmentSpecification = new AccountSpecification("department.name", "LIKE", search);
+			AccountSpecification departmentSpecification = new AccountSpecification("department", "LIKE", search);
+
 			where = Specification.where(fullnameSpecification).or(emailSpecification).or(departmentSpecification);
 		}
 
@@ -59,11 +64,11 @@ public class AccountService implements IAccountService {
 		account.setUsername(form.getUsername());
 		account.setFullname(form.getFullname());
 
-		// Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
+//		Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
 		Department department = departmentRepository.getById(form.getDepartmentId());
 		account.setDepartment(department);
 
-		// Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
+//		Từ id phòng ban==> tìm ra được phòng ban tương ứng: form.getDepartmentId()
 		Position position = possitionRepository.getById(form.getPositionId());
 		account.setPosition(position);
 
@@ -94,6 +99,16 @@ public class AccountService implements IAccountService {
 		return accountRepository.findByEmail(email)
 				.orElseThrow(() -> new IllegalArgumentException("Account not found with email = " + email));
 
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Account account_db = accountRepository.findByUsername(username);
+		if (account_db == null) {
+			throw new UsernameNotFoundException(username);
+		}
+
+		return new User(account_db.getUsername(), account_db.getPassword(), AuthorityUtils.createAuthorityList("user"));
 	}
 
 }
