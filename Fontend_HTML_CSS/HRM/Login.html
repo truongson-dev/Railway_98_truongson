@@ -1,63 +1,40 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Register Form - Page</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="register.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <script src="//code.jquery.com/jquery.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   </head>
-
   <body>
-    <div class="container" style="width: 70%">
-      <br />
-      <br />
-      <br />
-      <h3>LOGIN</h3>
-      <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <br />
+          <br />
+          <br />
+          <h3>LOGIN</h3>
+          <br />
 
-      <div class="form-group">
-        <label for="Email">Username:</label>
-        <input
-          type="text"
-          required="true"
-          class="form-control"
-          id="Username_Login_id"
-          value=""
-          required
-          placeholder="Enter Username"
-        />
+          <div class="form-group">
+            <label for="Email">Username:</label>
+            <input type="text" required="true" class="form-control" id="Username_Login_id" value="" required placeholder="Enter Username" />
+          </div>
+          <div class="form-group">
+            <label for="Password">Password:</label>
+            <input type="Password" required="true" class="form-control" id="Password_Login_id" value="" required placeholder="Enter Password" />
+          </div>
+          <button type="button" class="btn btn-info" onclick="handleLogin()">Login</button>
+          <button type="button" class="btn btn-info" onclick="handleRegister()">Register</button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="Password">Password:</label>
-        <input
-          type="Password"
-          required="true"
-          class="form-control"
-          id="Password_Login_id"
-          value=""
-          required
-          placeholder="Enter Password"
-        />
-      </div>
-      <button type="submit" class="btn btn-info" onclick="loginSuccess()">
-        Login
-      </button>
-      <button type="submit" class="btn btn-info" onclick="returnPageRegister()">
-        Register
-      </button>
     </div>
+
     <!--  -->
-    <script type="text/javascript" src="hrm.js"></script>
+    <script type="text/javaScript" src="./hrm.js"></script>
   </body>
 </html>
