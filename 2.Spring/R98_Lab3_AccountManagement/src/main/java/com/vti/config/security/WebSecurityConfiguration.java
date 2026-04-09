@@ -3,6 +3,7 @@ package com.vti.config.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -25,7 +26,26 @@ public class WebSecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable()).cors(cors -> {
-		}).authorizeHttpRequests(auth -> auth.anyRequest().authenticated()).httpBasic();
+		}).authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/accountsRegister/**").permitAll()
+				// ================= Account =================
+				.requestMatchers(HttpMethod.POST, "/api/v1/accounts/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.PUT, "/api/v1/accounts/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.DELETE, "/api/v1/accounts/**").hasRole("ADMIN").
+
+				requestMatchers(HttpMethod.GET, "/api/v1/accounts/**").hasAnyRole("ADMIN", "USER")
+				// ================= DEPARTMENT =================
+				.requestMatchers(HttpMethod.GET, "/api/v1/departments/**").hasAnyRole("ADMIN", "USER")
+				.requestMatchers(HttpMethod.POST, "/api/v1/departments/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.PUT, "/api/v1/departments/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.DELETE, "/api/v1/departments/**").hasRole("ADMIN")
+
+				// ================= POSSITION =================
+				.requestMatchers(HttpMethod.GET, "/api/v1/possitions/**").hasAnyRole("ADMIN", "USER")
+				.requestMatchers(HttpMethod.POST, "/api/v1/possitions/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.PUT, "/api/v1/possitions/**").hasRole("ADMIN")
+				.requestMatchers(HttpMethod.DELETE, "/api/v1/possitions/**").hasRole("ADMIN")
+
+				.anyRequest().authenticated()).httpBasic();
 
 		return http.build();
 	}

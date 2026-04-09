@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,6 +16,7 @@ import com.vti.entity.Account;
 import com.vti.entity.Department;
 import com.vti.entity.Position;
 import com.vti.form.AccountFormForCreating;
+import com.vti.form.AccountFormForCreatingRegister;
 import com.vti.form.AccountFormForUpdating;
 import com.vti.repository.IAccountRepository;
 import com.vti.repository.IDepartmentRepository;
@@ -31,6 +33,10 @@ public class AccountService implements IAccountService {
 
 	@Autowired
 	private IPossitionRepository possitionRepository;
+
+//	Dùng để mã hóa Password
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public Page<Account> getAllAccount(Pageable pageable, String search) {
@@ -108,7 +114,24 @@ public class AccountService implements IAccountService {
 			throw new UsernameNotFoundException(username);
 		}
 
-		return new User(account_db.getUsername(), account_db.getPassword(), AuthorityUtils.createAuthorityList("user"));
+		return new User(account_db.getUsername(), account_db.getPassword(),
+				AuthorityUtils.createAuthorityList("ROLE_" + account_db.getRole()));
+	}
+
+	@Override
+	public void createAccountRegister(AccountFormForCreatingRegister form) {
+// Thêm Account vào DB
+		Account account = new Account();
+		Department department = departmentRepository.getById(form.getDepartmentId());
+		Position position = possitionRepository.getById(form.getPositionId());
+		account.setEmail(form.getEmail());
+		account.setUsername(form.getUsername());
+		account.setFullname(form.getFullname());
+		account.setDepartment(department);
+		account.setPosition(position);
+		account.setPassword(passwordEncoder.encode(form.getPassword())); // 123456 ==> mã hóa
+		account.setRole("USER");
+		accountRepository.save(account);
 	}
 
 }

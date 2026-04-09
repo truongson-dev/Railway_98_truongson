@@ -52,6 +52,9 @@ public class Account implements Serializable {
 	@Column(name = "password", length = 800)
 	private String password;
 
+	@Column(name = "Role", length = 50)
+	private String role;
+
 	public Account() {
 		super();
 	}
@@ -160,6 +163,14 @@ public class Account implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override

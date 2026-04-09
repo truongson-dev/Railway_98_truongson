@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.vti.entity.Account;
 import com.vti.form.AccountFormForCreating;
+import com.vti.form.AccountFormForCreatingRegister;
 import com.vti.form.AccountFormForUpdating;
 
 public interface IAccountService extends UserDetailsService {
@@ -21,5 +22,7 @@ public interface IAccountService extends UserDetailsService {
 	void deleteAccount(short id);
 
 	Account getAccountByEmail(String email);
+
+	void createAccountRegister(AccountFormForCreatingRegister form);
 
 }
