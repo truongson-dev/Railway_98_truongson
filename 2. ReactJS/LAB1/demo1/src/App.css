@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+.classDiv {
+  color: red;
+  background-color: yellow;
+  height: 200px;
+  width: 300px;
+}
